@@ -1,0 +1,150 @@
+//variables principales
+$main-color: #D85A5A;
+$body-color: #9E7474;
+$second-color: #314a5b;
+
+//mixin
+@mixin heading-font($font, $size, $weight) {
+    font-size: $size+rem;
+    @if($font==poppins){
+        font-family: 'Poppins', sans-serif;
+    }@else if($font==raleway){
+        font-family: 'Raleway', sans-serif;
+    }@else if($font==futura){
+        font-family: 'Futura', sans-serif;
+    @if($weight==regular){
+        font-weight: 400;
+    }@else if($weight==medium){
+        font-weight: 500;
+    }@else if($weight==bold){
+        font-weight: 700;
+    }
+  }
+}
+
+@mixin padding($position, $n) { 
+    @if($position==top){
+        padding-top: $n+rem;
+    }@else if($position==right){
+        padding-right: $n+rem;
+    }@else if($position==left){
+        padding-left: $n+rem;
+    }@else if($position==bottom){
+        padding-bottom: $n+rem;
+    }
+}
+
+@mixin margin($position, $n) { 
+    @if($position==top){
+        margin-top: $n+rem;
+    }@else if($position==right){
+        margin-right: $n+rem;
+    }@else if($position==left){
+        margin-left: $n+rem;
+    }@else if($position==bottom){
+        margin-bottom: $n+rem;
+    }
+}
+
+@mixin btns($colorBackground, $colorFont){
+    @if($colorBackground==rojo){
+        background-color: $main-color;
+    }@else if($colorBackground==blanco){
+        background-color: white;
+    }@if($colorFont==rojo){
+        color: $main-color;
+    }@else if($colorFont==blanco){
+        color: white;
+    }
+}
+
+
+//extend
+%align{
+    padding-left: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+%btn-style{
+    font-family: 'Raleway', sans-serif;
+    font-size: 1;
+    font-weight: 500;
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 1.5rem;
+    border-style: inherit;
+    cursor: pointer;
+    transition: .6s;
+    &:hover{
+        background: $second-color;
+    }
+}
+
+//clases
+.left-line{
+    border-left: 6px solid $main-color;
+    height: 265px;
+    margin-left: 3rem;
+    margin-top: 1.5rem;
+}
+
+.btn-left{
+    @include btns(rojo, blanco);
+    @extend %btn-style;
+    box-shadow: 2px 2px 2px 1px rgba(30, 30, 30, 0.5);
+    margin-left: 1rem;
+    margin-top: 3rem;
+    
+}
+
+.btn-right{
+    @include btns(blanco, rojo);
+    @extend %btn-style;
+    box-shadow: 2px 2px 2px 1px rgba(30, 30, 30, 0.5);
+    margin-left: 1.5rem;
+    &:hover{
+        color: white;
+    }
+}
+
+h1{
+    @include heading-font(futura, 2, bold);
+    @include padding(left, 3.5);
+    @include padding(bottom, 1);
+}
+
+h2{
+    @include heading-font(raleway, 2.5, bold);
+    @include padding(top, 1);
+    @extend %align;
+}
+
+h3{
+    @include heading-font(poppins, 1.5, medium);
+    @extend %align;
+}
+
+h4{
+    @include heading-font(raleway, 1, bold);
+    @include padding(left, 1);
+    @include margin(top, 3);
+    @include margin(bottom, -.5);
+}
+
+h5{
+    color: $body-color;
+    @include heading-font(raleway, 1, regular);
+    @include padding(left, 1);
+    @include margin(top, 1);
+    @include margin(bottom, .5);
+}
+
+p{
+    color: $body-color;
+    @include heading-font(raleway, 1, regular);
+    @include padding(left, 1);
+    @include margin(top, 1);
+    line-height : 1.5rem
+}
