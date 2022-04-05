@@ -22,6 +22,18 @@ $second-color: #314a5b;
   }
 }
 
+@mixin btns($colorBackground, $colorFont){
+    @if($colorBackground==rojo){
+        background-color: $main-color;
+    }@else if($colorBackground==blanco){
+        background-color: white;
+    }@if($colorFont==rojo){
+        color: $main-color;
+    }@else if($colorFont==blanco){
+        color: white;
+    }
+}
+
 @mixin padding($position, $n) { 
     @if($position==top){
         padding-top: $n+rem;
@@ -46,36 +58,17 @@ $second-color: #314a5b;
     }
 }
 
-@mixin btns($colorBackground, $colorFont){
-    @if($colorBackground==rojo){
-        background-color: $main-color;
-    }@else if($colorBackground==blanco){
-        background-color: white;
-    }@if($colorFont==rojo){
-        color: $main-color;
-    }@else if($colorFont==blanco){
-        color: white;
-    }
-}
-
-
-//extend
-%align{
-    padding-left: 1rem;
-    margin-top: .5rem;
-    margin-bottom: .5rem;
-}
-
 %btn-style{
     font-family: 'Raleway', sans-serif;
     font-size: 1;
-    font-weight: 500;
     padding: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    @include padding(left, 2);
+    @include padding(right, 2);
+    @include margin(top, 2);    
     border-radius: 1.5rem;
     border-style: inherit;
     cursor: pointer;
+    box-shadow: 2px 2px 2px 1px rgba(30, 30, 30, 0.5);
     transition: .6s;
     &:hover{
         background: $second-color;
@@ -86,24 +79,20 @@ $second-color: #314a5b;
 .left-line{
     border-left: 6px solid $main-color;
     height: 265px;
-    margin-left: 3rem;
-    margin-top: 1.5rem;
+    @include margin(left, 3);
+    @include margin(top, 1.5);
 }
 
 .btn-left{
     @include btns(rojo, blanco);
     @extend %btn-style;
-    box-shadow: 2px 2px 2px 1px rgba(30, 30, 30, 0.5);
-    margin-left: 1rem;
-    margin-top: 3rem;
-    
+    @include margin(left, 1.2);
+    @include margin(right, 1.7);
 }
 
 .btn-right{
     @include btns(blanco, rojo);
     @extend %btn-style;
-    box-shadow: 2px 2px 2px 1px rgba(30, 30, 30, 0.5);
-    margin-left: 1.5rem;
     &:hover{
         color: white;
     }
@@ -118,12 +107,16 @@ h1{
 h2{
     @include heading-font(raleway, 2.5, bold);
     @include padding(top, 1);
-    @extend %align;
+    @include margin(top, .5);
+    @include margin(bottom, .5);
+    @include padding(left, 1);
 }
 
 h3{
     @include heading-font(poppins, 1.5, medium);
-    @extend %align;
+    @include margin(top, .5);
+    @include margin(bottom, .5);
+    @include padding(left, 1);
 }
 
 h4{
